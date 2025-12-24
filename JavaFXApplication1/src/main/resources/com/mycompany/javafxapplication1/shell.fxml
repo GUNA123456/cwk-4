@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.mycompany.javafxapplication1.ShellController"
+      spacing="10" style="-fx-background-color: #1E1E1E;">
+    
+    <padding>
+        <Insets top="15" bottom="15" left="15" right="15" />
+    </padding>
+    
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label fx:id="lblShellInfo" text="Shell Emulator" 
+               style="-fx-text-fill: #00FF00; -fx-font-size: 14px; -fx-font-weight: bold; -fx-font-family: 'Courier New', monospace;" />
+    </HBox>
+    
+    <Separator style="-fx-background-color: #00FF00;" />
+    
+    <!-- Output Area (Terminal Display) -->
+    <TextArea fx:id="txtOutput" editable="false" wrapText="true" 
+              VBox.vgrow="ALWAYS" prefHeight="350"
+              style="-fx-control-inner-background: #000000; 
+                     -fx-text-fill: #00FF00; 
+                     -fx-font-family: 'Courier New', monospace; 
+                     -fx-font-size: 13px;
+                     -fx-highlight-fill: #00FF00;
+                     -fx-highlight-text-fill: #000000;" />
+    
+    <!-- Command Input Area -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text=">" style="-fx-text-fill: #00FF00; -fx-font-size: 14px; -fx-font-weight: bold; -fx-font-family: 'Courier New', monospace;" />
+        
+        <TextField fx:id="txtCommand" promptText="Enter command..." 
+                   HBox.hgrow="ALWAYS"
+                   style="-fx-background-color: #2E2E2E; 
+                          -fx-text-fill: #00FF00; 
+                          -fx-prompt-text-fill: #666666;
+                          -fx-font-family: 'Courier New', monospace; 
+                          -fx-font-size: 13px;" />
+        
+        <Button fx:id="btnRun" text="Run" onAction="#handleRunCommand" 
+                prefWidth="80"
+                style="-fx-background-color: #28a745; 
+                       -fx-text-fill: white; 
+                       -fx-font-size: 12px; 
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;" />
+    </HBox>
+    
+    <!-- Action Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="btnClear" text="Clear Output" onAction="#handleClear" 
+                prefWidth="120"
+                style="-fx-background-color: #ffc107; 
+                       -fx-text-fill: black; 
+                       -fx-font-size: 12px;
+                       -fx-cursor: hand;" />
+        
+        <Button fx:id="btnHistory" text="History" onAction="#handleHistory" 
+                prefWidth="100"
+                style="-fx-background-color: #17a2b8; 
+                       -fx-text-fill: white; 
+                       -fx-font-size: 12px;
+                       -fx-cursor: hand;" />
+        
+        <Region HBox.hgrow="ALWAYS" />
+        
+        <Button fx:id="btnClose" text="Close" onAction="#handleClose" 
+                prefWidth="80"
+                style="-fx-background-color: #dc3545; 
+                       -fx-text-fill: white; 
+                       -fx-font-size: 12px;
+                       -fx-cursor: hand;" />
+    </HBox>
+</VBox>

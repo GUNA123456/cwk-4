@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.mycompany.javafxapplication1.AdminDashboardController">
+    
+    <!-- LEFT SIDEBAR -->
+    <VBox prefWidth="220" style="-fx-background-color: #1A3A52;">
+        <padding>
+            <Insets top="30" bottom="30" left="20" right="20" />
+        </padding>
+        <spacing>15</spacing>
+        
+        <!-- Admin Info -->
+        <Label fx:id="lblAdminInfo" text="Admin Panel" 
+               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+        
+        <Separator style="-fx-background-color: #5FA4B8;" />
+        
+        <!-- Menu Buttons -->
+        <Button fx:id="btnUserManagementMenu" text="User Management" onAction="#showUserManagement" 
+                prefWidth="180" prefHeight="40" 
+                style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand;" />
+        
+        <Button fx:id="btnFileManagementMenu" text="File Management" onAction="#showFileManagement" 
+                prefWidth="180" prefHeight="40" 
+                style="-fx-background-color: #1A3A52; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand;" />
+        
+        <Button fx:id="btnAdvancedPanelMenu" text="Advanced Panel" onAction="#showAdvancedPanel" 
+                prefWidth="180" prefHeight="40" 
+                style="-fx-background-color: #1A3A52; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand;" />
+        
+        <!-- Spacer -->
+        <Region VBox.vgrow="ALWAYS" />
+        
+        <!-- Logout Button -->
+        <Button fx:id="btnLogout" text="Logout" onAction="#handleLogout" 
+                prefWidth="180" prefHeight="40" 
+                style="-fx-background-color: #1A3A52; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;" />
+    </VBox>
+    
+    <!-- RIGHT CONTENT AREA -->
+    <StackPane HBox.hgrow="ALWAYS" style="-fx-background-color: #2F7287;">
+        
+        <!-- USER MANAGEMENT PANEL -->
+        <AnchorPane fx:id="userManagementPanel" visible="true" style="-fx-background-color: #2F7287;">
+            <VBox spacing="20" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+                <Label text="User Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+                
+                <!-- User Table -->
+                <TableView fx:id="tblUsers" prefHeight="400">
+                    <columns>
+                        <TableColumn fx:id="colUsername" text="Username" prefWidth="250" />
+                        <TableColumn fx:id="colRole" text="Role" prefWidth="150" />
+                    </columns>
+                </TableView>
+                
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER" spacing="15">
+                    <Button fx:id="btnPromoteToAdmin" text="Promote to Admin" onAction="#handlePromoteToAdmin" 
+                            style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;" />
+                    <Button fx:id="btnDemoteToUser" text="Demote to User" onAction="#handleDemoteToUser" 
+                            style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;" />
+                    <Button fx:id="btnDeleteUser" text="Delete User" onAction="#handleDeleteUser" 
+                            style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;" />
+                    <Button fx:id="btnRefresh" text="Refresh" onAction="#handleRefresh" 
+                            style="-fx-background-color: #999999; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;" />
+                </HBox>
+                
+                <!-- Status Label -->
+                <Label fx:id="lblUserStatus" text="" style="-fx-text-fill: #28a745; -fx-font-size: 13px; -fx-font-weight: bold;" />
+            </VBox>
+        </AnchorPane>
+        
+        <!-- FILE MANAGEMENT PANEL -->
+        <AnchorPane fx:id="fileManagementPanel" visible="false" style="-fx-background-color: #2F7287;">
+            <VBox spacing="20" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+                <Label text="File Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+                
+                <Label text="Admin file management features coming soon..." 
+                       style="-fx-text-fill: white; -fx-font-size: 14px;" />
+                
+                <!-- Placeholder for future file management features -->
+                <TextArea promptText="File management content area" prefHeight="400" 
+                         style="-fx-background-color: #E0E0E0;" />
+            </VBox>
+        </AnchorPane>
+        
+        <!-- ADVANCED PANEL -->
+        <AnchorPane fx:id="advancedPanel" visible="false" style="-fx-background-color: #2F7287;">
+            <VBox spacing="20" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+                <Label text="Advanced Panel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+                
+                <!-- System Management Section -->
+                <Label text="System Management" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                
+                <VBox spacing="10">
+                    <Label text="• Logs by container (date, container id)" style="-fx-text-fill: white; -fx-font-size: 14px;" />
+                    <Label text="• Remote shell" style="-fx-text-fill: white; -fx-font-size: 14px;" />
+                    <Label text="• System monitoring" style="-fx-text-fill: white; -fx-font-size: 14px;" />
+                </VBox>
+                
+                <Separator style="-fx-background-color: #5FA4B8;" />
+                
+                <!-- Placeholder for advanced features -->
+                <Label text="Advanced features coming soon..." 
+                       style="-fx-text-fill: white; -fx-font-size: 14px;" />
+            </VBox>
+        </AnchorPane>
+        
+    </StackPane>
+</HBox>

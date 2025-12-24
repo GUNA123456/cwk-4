@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.javafxapplication1.AdvancedPanelController"
+            style="-fx-background-color: #2B547E;">
+    
+    <!-- LEFT SIDEBAR (MATCHING user_account.fxml) -->
+    <left>
+        <VBox spacing="0" style="-fx-background-color: #1A3A52;" prefWidth="220" minWidth="220" maxWidth="220">
+            <padding>
+                <Insets top="20" bottom="20" left="0" right="0" />
+            </padding>
+            <children>
+                <!-- User Management Button -->
+                <Button fx:id="btnUserManagementMenu" text="User Management" onAction="#showUserManagement" 
+                        style="-fx-background-color: #1A3A52; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 15; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-width: 0;" 
+                        maxWidth="Infinity" />
+                <Separator style="-fx-background-color: #0D2A35; -fx-padding: 0;" />
+                
+                <!-- File Management Button -->
+                <Button fx:id="btnFileManagementMenu" text="File Management" onAction="#showFileManagement" 
+                        style="-fx-background-color: #1A3A52; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 15; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-width: 0;" 
+                        maxWidth="Infinity" />
+                <Separator style="-fx-background-color: #0D2A35; -fx-padding: 0;" />
+                
+                <!-- Advanced Panel Button (Active) -->
+                <Button fx:id="btnAdvancedPanelMenu" text="Advanced Panel" onAction="#showAdvancedPanel" 
+                        style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 15; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-width: 0;" 
+                        maxWidth="Infinity" />
+                <Separator style="-fx-background-color: #0D2A35; -fx-padding: 0;" />
+                
+                <!-- Spacer to push Logout to bottom -->
+                <Region VBox.vgrow="ALWAYS" />
+                
+                <!-- Logout Button (Danger Style) -->
+                <Button fx:id="btnLogout" text="Logout" onAction="#handleLogout" 
+                        style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 15; -fx-alignment: CENTER; -fx-cursor: hand; -fx-border-width: 0;" 
+                        maxWidth="Infinity" />
+            </children>
+        </VBox>
+    </left>
+    
+    <!-- CENTER CONTENT (MATCHING DARK THEME) -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #2B547E; -fx-background: #2B547E;">
+            <VBox spacing="20" style="-fx-background-color: #2B547E;">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30" />
+                </padding>
+                
+                <!-- HEADER -->
+                <Label text="Advanced Tools Panel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                
+                <Separator style="-fx-background-color: #5FA4B8;" />
+                
+                <!-- SECTION 1: CHUNK CHECKER -->
+                <VBox spacing="10" style="-fx-background-color: #1A3A52; -fx-padding: 20; -fx-background-radius: 5;">
+                    <Label text="File Chunk Checker" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label text="Check if all file chunks exist based on metadata" style="-fx-text-fill: #B0BEC5;" />
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="fileNameFieldChunks" promptText="Enter filename (e.g., file.txt)" 
+                                   HBox.hgrow="ALWAYS" style="-fx-pref-width: 300; -fx-background-color: #2B547E; -fx-text-fill: white; -fx-prompt-text-fill: #90A4AE;" />
+                        <Button fx:id="checkChunksButton" text="Check Chunks" 
+                                onAction="#handleCheckChunks"
+                                style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 10 20;" />
+                    </HBox>
+                    
+                    <TextArea fx:id="chunksOutputArea" editable="false" wrapText="true"
+                              prefHeight="120" 
+                              style="-fx-font-family: 'Courier New'; -fx-font-size: 12px; -fx-control-inner-background: #0D2A35; -fx-text-fill: white;" />
+                </VBox>
+                
+                <!-- SECTION 2: CRC32 VALIDATOR -->
+                <VBox spacing="10" style="-fx-background-color: #1A3A52; -fx-padding: 20; -fx-background-radius: 5;">
+                    <Label text="CRC32 Integrity Validator" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label text="Validate file chunk integrity using CRC32 checksums" style="-fx-text-fill: #B0BEC5;" />
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="fileNameFieldCRC32" promptText="Enter filename (e.g., file.txt)" 
+                                   HBox.hgrow="ALWAYS" style="-fx-pref-width: 300; -fx-background-color: #2B547E; -fx-text-fill: white; -fx-prompt-text-fill: #90A4AE;" />
+                        <Button fx:id="checkCRCButton" text="Validate CRC32" 
+                                onAction="#handleCheckCRC"
+                                style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 10 20;" />
+                    </HBox>
+                    
+                    <TextArea fx:id="crcOutputArea" editable="false" wrapText="true"
+                              prefHeight="120" 
+                              style="-fx-font-family: 'Courier New'; -fx-font-size: 12px; -fx-control-inner-background: #0D2A35; -fx-text-fill: white;" />
+                </VBox>
+                
+                <!-- SECTION 3: ACCESS CONTROL CHECKER -->
+                <VBox spacing="10" style="-fx-background-color: #1A3A52; -fx-padding: 20; -fx-background-radius: 5;">
+                    <Label text="Access Permission Checker" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label text="Check if you have access to a file based on metadata" style="-fx-text-fill: #B0BEC5;" />
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="fileNameFieldAccess" promptText="Enter filename (e.g., file.txt)" 
+                                   HBox.hgrow="ALWAYS" style="-fx-pref-width: 300; -fx-background-color: #2B547E; -fx-text-fill: white; -fx-prompt-text-fill: #90A4AE;" />
+                        <Button fx:id="checkAccessButton" text="Check Access" 
+                                onAction="#handleCheckAccess"
+                                style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 10 20;" />
+                    </HBox>
+                    
+                    <Label fx:id="accessResultLabel" text="" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10; -fx-text-fill: white;" />
+                </VBox>
+                
+                <!-- SECTION 4: LOGS VIEWER -->
+                <VBox spacing="10" style="-fx-background-color: #1A3A52; -fx-padding: 20; -fx-background-radius: 5;">
+                    <Label text="Logs Viewer" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label text="View operation logs (filtered by date and container)" style="-fx-text-fill: #B0BEC5;" />
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <DatePicker fx:id="logFromDate" promptText="From Date" prefWidth="150" 
+                                    style="-fx-background-color: #2B547E;" />
+                        <DatePicker fx:id="logToDate" promptText="To Date" prefWidth="150" 
+                                    style="-fx-background-color: #2B547E;" />
+                        <TextField fx:id="containerIdField" promptText="Container ID (optional)" prefWidth="150" 
+                                   style="-fx-background-color: #2B547E; -fx-text-fill: white; -fx-prompt-text-fill: #90A4AE;" />
+                        <Button fx:id="loadLogsButton" text="Load Logs" 
+                                onAction="#handleLoadLogs"
+                                style="-fx-background-color: #5FA4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 10 20;" />
+                    </HBox>
+                    
+                    <TableView fx:id="logsTable" prefHeight="250" style="-fx-background-color: #0D2A35; -fx-control-inner-background: #0D2A35;">
+                        <columns>
+                            <TableColumn fx:id="colTimestamp" text="Timestamp" prefWidth="150" />
+                            <TableColumn fx:id="colUsername" text="Username" prefWidth="100" />
+                            <TableColumn fx:id="colAction" text="Action" prefWidth="120" />
+                            <TableColumn fx:id="colContainer" text="Container" prefWidth="100" />
+                            <TableColumn fx:id="colDetails" text="Details" prefWidth="250" />
+                        </columns>
+                    </TableView>
+                </VBox>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+</BorderPane>
